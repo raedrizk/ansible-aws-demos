@@ -1,0 +1,5 @@
+---
+- name: create IGW
+  hosts: all
+  roles:
+  - aws_create_internet_gateway

@@ -1,0 +1,18 @@
+---
+# tasks file for provision_sg
+- name: dns for ec2 instance
+  amazon.aws.route53:
+    state: present
+    zone: "{{ dns_zone }}"
+    record: "{{ ec2_name_tag|lower }}-{{ item.0 }}.{{ dns_zone }}"
+    type: A
+    overwrite: true
+    value: "{{ item.1.public_ip }}"
+  delegate_to: localhost
+  with_indexed_items: "{{ ec2.instances }}"
+
+- name: Print info
+  ansible.builtin.debug:
+    msg: "DNS: {{ ec2_name_tag|lower }}-{{ item.0 }}.{{ dns_zone }}         IP_ADDRESS: {{ item.1.public_ip }}"
+  with_indexed_items: "{{ ec2.instances }}"
+

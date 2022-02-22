@@ -1,0 +1,8 @@
+---
+# vars file for aws_create_routing_table
+aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+
+#routing table Variables
+rt_name_tag: "{{ rt_name_tag_choice | default('Ansible_created_RT') }}"

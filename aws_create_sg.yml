@@ -1,0 +1,5 @@
+---
+- name: create Security Group
+  hosts: all
+  roles:
+  - aws_create_sg

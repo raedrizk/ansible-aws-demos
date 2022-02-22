@@ -1,0 +1,13 @@
+---
+- name: Create A Windows 2019 Baremetal EC2 Instance
+  hosts: localhost
+  roles:
+    - aws_create_keypair
+    - aws_create_vpc
+    - aws_create_subnet
+    - aws_create_internet_gateway
+    - aws_create_routing_table
+    - aws_create_sg
+    - aws_provision_ec2
+
+

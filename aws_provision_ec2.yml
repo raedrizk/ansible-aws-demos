@@ -1,0 +1,5 @@
+---
+- name: Provision EC2
+  hosts: all
+  roles:
+  - aws_provision_ec2

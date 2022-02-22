@@ -1,0 +1,26 @@
+---
+# tasks file for aws_create_vpc
+- name: Create AWS VPC {{ vpc_name_tag }}-vpc
+  amazon.aws.ec2_vpc_net:
+    name: "{{ vpc_name_tag }}-vpc"
+    cidr_block:
+      - "{{ cidr_block }}"
+    region: "{{ aws_region }}"
+    tags:
+      Name: "{{ vpc_name_tag }}"
+      Provisioner: "{{ provisioner_tag }}"
+      Created: "{{ created_tag }}"
+  register: create_vpc
+  until: create_vpc is not failed
+  retries: 5
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_vpc_id: "{{ create_vpc.vpc.id | default('') }}"
+  when: create_vpc.vpc.id is defined
+
+- name: Setting Facts for future tasks
+  ansible.builtin.set_fact:
+    stat_created_vpc_id: "{{ create_vpc.vpc.id | default('') }}"
+  when: create_vpc.vpc.id is defined

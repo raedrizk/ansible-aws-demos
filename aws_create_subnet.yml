@@ -1,0 +1,5 @@
+---
+- name: create Subnet
+  hosts: all
+  roles:
+  - aws_create_subnet

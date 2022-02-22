@@ -1,0 +1,18 @@
+---
+# tasks file for aws_create_routing_table
+- name: Create Routing table for VPC {{ stat_created_vpc_id }}
+  community.aws.ec2_vpc_route_table:
+    region: "{{ aws_region }}"
+    vpc_id: "{{ stat_created_vpc_id }}"
+    subnets:
+      - "{{ stat_created_subnet_id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ stat_created_igw_id }}"
+    tags:
+      Name: "{{ rt_name_tag }}"
+      Provisioner: "{{ provisioner_tag }}"
+      Created: "{{ created_tag }}"
+  register: create_routetable
+  until: create_routetable is not failed
+  retries: 5

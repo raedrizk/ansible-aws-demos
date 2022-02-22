@@ -1,0 +1,5 @@
+---
+- name: create keypair
+  hosts: all
+  roles:
+  - aws_create_keypair

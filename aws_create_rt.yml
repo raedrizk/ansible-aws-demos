@@ -1,0 +1,5 @@
+---
+- name: create Routing Table
+  hosts: all
+  roles:
+  - aws_create_routing_table

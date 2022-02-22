@@ -1,0 +1,24 @@
+---
+# tasks file for aws_create_internet_gateway
+- name: Create internet gateway for VPC {{ stat_created_vpc_id }}
+  community.aws.ec2_vpc_igw:
+    region: "{{ aws_region }}"
+    vpc_id: "{{ stat_created_vpc_id }}"
+    tags:
+      Name: "{{ igw_name_tag }}"
+      Provisioner: "{{ provisioner_tag }}"
+      Created: "{{ created_tag }}"
+  register: create_igw
+  until: create_igw is not failed
+  retries: 15
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_igw_id: "{{ create_igw.gateway_id | default('') }}"
+  when: create_igw.gateway_id is defined
+
+- name: Setting facts for future tasks
+  ansible.builtin.set_fact:
+    stat_created_igw_id: "{{ create_igw.gateway_id | default('') }}"
+  when: create_igw.gateway_id is defined

@@ -1,0 +1,16 @@
+---
+# vars file for aws-create-sg
+aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+
+# SG variables 
+sg_name_tag: "{{ sg_name_tag_choice | default('Ansible_created_SG') }}"
+tcp_ingress_ports:
+  - 8080
+  - 443
+  - 80
+  - 44321
+  - 44322
+  - 44323
+  - 5432
