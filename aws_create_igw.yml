@@ -2,4 +2,4 @@
 - name: create IGW
   hosts: all
   roles:
-  - aws_create_internet_gateway
+  - rsoliman.aws_demos.aws_create_internet_gateway
