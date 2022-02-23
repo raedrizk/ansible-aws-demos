@@ -1,7 +1,7 @@
 ---
 # tasks file for aws_create_internet_gateway
 - name: Create internet gateway for VPC {{ stat_created_vpc_id }}
-  community.aws.ec2_vpc_igw:
+  amazon.aws.ec2_vpc_igw:
     region: "{{ aws_region }}"
     vpc_id: "{{ stat_created_vpc_id }}"
     tags:
