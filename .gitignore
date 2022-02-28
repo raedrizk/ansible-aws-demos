@@ -1,0 +1,5 @@
+ansible-navigator.yml
+localhost_inventory
+artifacts
+logs
+vars/controller.yml

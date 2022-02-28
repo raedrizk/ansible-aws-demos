@@ -1,0 +1,14 @@
+---
+instance_ami_choice: Linux
+
+available_ami_ids:
+  Windows: 'ami-0a946ae2c8490b0ff' #Windows_Server-2019-English-Full-HyperV-2021.08.11
+  Linux: 'ami-0b0af3577fe5e3532' #Access RHEL 8
+
+available_userdata_template_file_names:
+  Windows: userdata_Windows.txt.j2
+  Linux: userdata_Linux.txt.j2
+
+available_wait_for_ports:
+  Windows: 5986
+  Linux: 22

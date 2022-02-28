@@ -1,7 +1,6 @@
 ---
 # tasks file for aws_provision_ec2
-- debug:
-    var: ec2_security_group
+
 - name: Provision EC2 instance(s)
   amazon.aws.ec2:
     region: "{{ aws_region }}"
