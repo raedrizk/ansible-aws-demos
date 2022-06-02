@@ -1,5 +1,7 @@
 ansible-navigator.yml
 localhost_inventory
+artifacts/*
 artifacts
+logs/*
 logs
 vars/controller.yml
