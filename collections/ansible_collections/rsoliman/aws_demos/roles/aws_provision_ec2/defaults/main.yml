@@ -2,7 +2,7 @@
 instance_ami_choice: Linux
 
 available_ami_ids:
-  Windows: 'ami-' #Windows_Server-2016-Base
+  Windows: 'ami-091ea311bdd0e9179' #EC2LaunchV2-Windows_Server-2019-English-Full-Base-2022.05.25
   Linux: 'ami-0b0af3577fe5e3532' #Access RHEL 8
 
 available_userdata_template_file_names:
