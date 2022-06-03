@@ -12,7 +12,7 @@
   amazon.aws.ec2:
     instance_ids: "{{ item.instance_id }}"
     state: absent
-    region: "{{ ec2_region }}"
+    region: "{{ aws_region }}"
     wait: yes
   with_items: "{{ ec2.instances }}"
 
@@ -20,5 +20,5 @@
 - name: Delete Security Group for {{ ec2_name_tag }} WebServers
   amazon.aws.ec2_group:
     name: "{{ sg_name_tag }}"
-    region: "{{ ec2_region }}"
+    region: "{{ aws_region }}"
     state: absent
