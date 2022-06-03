@@ -22,3 +22,10 @@
     name: "{{ sg_name_tag }}"
     region: "{{ aws_region }}"
     state: absent
+  ignore_errors: yes
+  register: delete_sg
+
+- name: Fail if unable to delete the SG for any other reason than the Dependancy violation
+  ansible.builtin.fail:
+    msg: "{{ delete_sg.error.code}}: {{ delete_sg.error.message }}"
+  when: delete_sg.error.code is defined and delete_sg.error.code != "DependencyViolation"
