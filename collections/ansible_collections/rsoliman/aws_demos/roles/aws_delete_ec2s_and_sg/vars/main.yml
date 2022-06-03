@@ -1,0 +1,5 @@
+---
+aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+sg_name_tag: "{{ sg_name_tag_choice | default('Ansible_created_SG') }}"
+ec2_name_tag: "{{ ec2_name_tag_choice | default('Ansible_Created_EC2') }}"

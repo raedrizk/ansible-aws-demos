@@ -1,0 +1,24 @@
+---
+- name: Gather the instance IPs
+  amazon.aws.ec2_instance_info:
+    region: "{{ aws_region }}"
+    filters:
+      instance-state-name: running
+      "tag:Name": "{{ ec2_name_tag }}"
+      "tag:Provisioner": "{{ provisioner_tag }}"
+  register: ec2
+
+- name: Terminate Existing EC2 Instances if found
+  amazon.aws.ec2:
+    instance_ids: "{{ item.instance_id }}"
+    state: absent
+    region: "{{ ec2_region }}"
+    wait: yes
+  with_items: "{{ ec2.instances }}"
+
+
+- name: Delete Security Group for {{ ec2_name_tag }} WebServers
+  amazon.aws.ec2_group:
+    name: "{{ sg_name_tag }}"
+    region: "{{ ec2_region }}"
+    state: absent
