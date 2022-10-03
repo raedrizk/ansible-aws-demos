@@ -33,7 +33,7 @@
 
 - name: Wait for connection to come up
   wait_for: 
-    host: "{{ item.public_ip }}" 
+    host: "{{ item.public_ip_address }}" 
     port: "{{ wait_for_port }}" 
     state: started
     timeout: 3600
@@ -42,7 +42,7 @@
 
 - name: Wait for connection to come up
   wait_for: 
-    host: "{{ item.public_ip }}" 
+    host: "{{ item.public_ip_address }}" 
     port: "{{ wait_for_port }}" 
     state: started
     timeout: 3600
