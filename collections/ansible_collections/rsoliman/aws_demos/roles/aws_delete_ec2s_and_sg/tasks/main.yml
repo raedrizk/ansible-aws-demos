@@ -9,7 +9,7 @@
   register: ec2
 
 - name: Terminate Existing EC2 Instances if found
-  amazon.aws.ec2:
+  amazon.aws.ec2_instance:
     instance_ids: "{{ item.instance_id }}"
     state: absent
     region: "{{ aws_region }}"

@@ -2,7 +2,7 @@
 # tasks file for aws_provision_ec2
 
 - name: Provision EC2 instance(s)
-  amazon.aws.ec2:
+  amazon.aws.ec2_instance:
     region: "{{ aws_region }}"
     assign_public_ip: true
     instance_type: "{{ ec2_instance_type }}"
