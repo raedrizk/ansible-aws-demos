@@ -21,13 +21,13 @@
     user_data: "{{ lookup('template', ec2_userdata_template_file_name) }}"
     exact_count: "{{ ec2_instance_count }}"
     tags:
-      tag:Name: "{{ ec2_name_tag }}"
-      tag:Provisioner: "{{ provisioner_tag }}"
-      tag:Created: "{{ created_tag }}"
-    filters: 
       Name: "{{ ec2_name_tag }}"
       Provisioner: "{{ provisioner_tag }}"
       Created: "{{ created_tag }}"
+    filters: 
+      tag:Name: "{{ ec2_name_tag }}"
+      tag:Provisioner: "{{ provisioner_tag }}"
+      tag:Created: "{{ created_tag }}"
     wait: yes
   register: ec2
 
