@@ -14,4 +14,4 @@ ec2_security_group: "{{ stat_created_sg_id | default('') }}"
 
 subnet_name_tag: "{{ vpc_name_tag_choice | default('Ansible_created_Subnet') }}"
 subnet_az: "{{aws_region}}a"
-cidr_block: "{{ network_choice | default('172.17.1.0/28') }}"
+cidr_block: "{{ network_choice | default('172.17.1.0/24') }}"
