@@ -11,3 +11,7 @@ eni_description: "{{ eni_desc_choice | default('an ENI used for INFOBLOX IP addr
 ec2_instance_id: "{{ ec2_type_choice | default('c5n.metal') }}" 
 ec2_subnet_id: "{{ stat_created_subnet_id | default('') }}"
 ec2_security_group: "{{ stat_created_sg_id | default('') }}"
+
+subnet_name_tag: "{{ vpc_name_tag_choice | default('Ansible_created_Subnet') }}"
+subnet_az: "{{aws_region}}a"
+cidr_block: "{{ network_choice | default('172.17.1.0/28') }}"
