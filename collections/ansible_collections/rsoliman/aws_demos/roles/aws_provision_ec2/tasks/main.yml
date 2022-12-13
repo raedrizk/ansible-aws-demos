@@ -9,6 +9,7 @@
     key_name: "{{ ec2_keypair_name }}"
     security_group: "{{ ec2_security_group }}"
     vpc_subnet_id: "{{ ec2_subnet_id }}"
+    state: started
     network:
       assign_public_ip: true
       subnet_id: "{{ ec2_subnet_id }}"
