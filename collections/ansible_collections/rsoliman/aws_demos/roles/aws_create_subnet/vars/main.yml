@@ -7,4 +7,4 @@ created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
 #subnet Variables
 subnet_name_tag: "{{ vpc_name_tag_choice | default('Ansible_created_Subnet') }}"
 subnet_az: "{{aws_region}}a"
-cidr_block: "172.16.0.0/24"
+cidr_block: "172.17.2.0/28"
