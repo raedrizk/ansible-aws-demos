@@ -1,0 +1,5 @@
+---
+- name: Create and attach ENI
+  hosts: all
+  roles:
+  - rsoliman.aws_demos.aws_create_eni_with_infoblox_ip
