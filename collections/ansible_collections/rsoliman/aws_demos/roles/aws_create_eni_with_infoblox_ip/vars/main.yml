@@ -8,3 +8,6 @@ created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
 eni_name: "{{ eni_name_choice | default('VIP_eni') }}"
 eni_description: "{{ eni_desc_choice | default('an ENI used for INFOBLOX IP address binding') }}"
 
+ec2_instance_id: "{{ ec2_type_choice | default('c5n.metal') }}" 
+ec2_subnet_id: "{{ stat_created_subnet_id | default('') }}"
+ec2_security_group: "{{ stat_created_sg_id | default('') }}"
