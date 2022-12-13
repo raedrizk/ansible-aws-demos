@@ -1,0 +1,10 @@
+---
+# vars file for aws_create_eni
+aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+
+# ENI variables 
+eni_name: "{{ eni_name_choice | default('VIP_eni') }}"
+eni_desc: "{{ eni_desc_choice | default('an ENI used for INFOBLOX IP address binding') }}"
+

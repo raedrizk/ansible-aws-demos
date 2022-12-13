@@ -1,0 +1,29 @@
+---
+# tasks file for aws_create_eni
+- name: Setting Instance ID
+  ansible.builtin.set_fact:
+    instance_id: "{{ stat_created_ec2.instances[0].id }}"
+  when: stat_created_ec2 is defined and (stat_created_ec2.instances | length) > 0
+
+- name: Setting Instance ID
+  ansible.builtin.set_fact:
+    instance_id: "{{ stat_created_ec2.tagged_instances[0].id }}"
+  when: instance_id is not defined and stat_created_ec2 is defined and (stat_created_ec2.tagged_instances | length) > 0
+
+- name: Create First Additional ENI for the EC2 instance with Infloblox provided IP
+  amazon.aws.ec2_eni:
+    name: "{{ eni_name }}-1"
+    description: "{{ eni_description }}"
+    delete_on_termination: true
+    instance_id: "{{ instance_id }}"
+    private_ip_address: "{{ nios_next_ip_address }}"
+    device_index: 1
+    state: present
+    attached: true
+    tags:
+      Name: "{{ eni_name }}-1"
+      Provisioner: "{{ provisioner_tag }}"
+      Created: "{{ created_tag }}"
+  when: instance_id is defined
+
+
