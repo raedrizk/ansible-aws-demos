@@ -6,6 +6,7 @@
     az: "{{ subnet_az }}"
     vpc_id: "{{ stat_created_vpc_id }}"
     cidr: "{{ cidr_block }}"
+    map_public: true
     wait_timeout: 600
     resource_tags:
       Name: "{{ subnet_name_tag }}"
