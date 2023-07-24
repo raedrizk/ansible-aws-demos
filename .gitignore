@@ -5,3 +5,4 @@ artifacts
 logs/*
 logs
 vars/controller.yml
+.vscode
