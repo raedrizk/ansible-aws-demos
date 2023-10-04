@@ -1,10 +1,11 @@
 ---
-- name: Basic AMI Creation
+- name: Create AMI
   amazon.aws.ec2_ami:
-    instance_id: "{{ instance_id }}"
+    instance_id: "{{ hostvars[inventory_hostname].instance_id }}"
     wait: true
     name: "{{ ami_name_tag }}"
     tags:
       Name: "{{ ami_name_tag }}"
       CreatedBy: "{{ ami_createdby_tag }}"
       CreatedDate: "{{ ansible_date_time['epoch'] }}"
+  delegate_to: localhost
