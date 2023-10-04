@@ -1,0 +1,10 @@
+---
+- name: Basic AMI Creation
+  amazon.aws.ec2_ami:
+    instance_id: "{{ instance_id }}"
+    wait: true
+    name: "{{ ami_name_tag }}"
+    tags:
+      Name: "{{ ami_name_tag }}"
+      CreatedBy: "{{ ami_createdby_tag }}"
+      CreatedDate: "{{ ansible_date_time['epoch'] }}"

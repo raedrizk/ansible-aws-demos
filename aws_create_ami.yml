@@ -1,0 +1,5 @@
+---
+- name: create AMI
+  hosts: all
+  roles:
+  - rsoliman.aws_demos.aws_create_ami

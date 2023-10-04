@@ -1,0 +1,3 @@
+---
+ami_name_tag: "{{ ami_name_tag_choice | default('ansibleami') }}"
+ami_createdby_tag: "{{ ami_createdby_tag_choice | default('ansible') }}"
