@@ -7,5 +7,10 @@
     tags:
       Name: "{{ ami_name_tag }}"
       CreatedBy: "{{ ami_createdby_tag }}"
-      CreatedDate: "{{ ansible_date_time['epoch'] }}"
+  register: newami
+  delegate_to: localhost
+
+- name: Print Info
+  ansible.builtin.debug:
+    var: newami
   delegate_to: localhost
