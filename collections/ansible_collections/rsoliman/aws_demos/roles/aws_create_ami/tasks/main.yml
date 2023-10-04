@@ -2,6 +2,7 @@
 - name: Create AMI
   amazon.aws.ec2_ami:
     instance_id: "{{ hostvars[inventory_hostname].instance_id }}"
+    region: "{{ aws_region }}"
     wait: true
     name: "{{ ami_name_tag }}"
     tags:
