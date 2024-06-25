@@ -13,8 +13,8 @@
     network:
       assign_public_ip: true
       subnet_id: "{{ ec2_subnet_id }}"
-      groups: 
-      - "{{ ec2_security_group }}"
+      groups:
+        - "{{ ec2_security_group }}"
       delete_on_termination: true
     volumes:
       - device_name: /dev/sda1
@@ -32,26 +32,26 @@
     #   tag:Name: "{{ ec2_name_tag }}"
     #   tag:Provisioner: "{{ provisioner_tag }}"
     #   tag:Created: "{{ created_tag }}"
-    wait: yes
+    wait: true
   register: ec2
 
 - name: Wait for connection to come up
-  wait_for: 
-    host: "{{ item.public_ip_address }}" 
-    port: "{{ wait_for_port }}" 
+  when: ec2.instances is defined
+  ansible.builtin.wait_for:
+    host: "{{ item.public_ip_address }}"
+    port: "{{ wait_for_port }}"
     state: started
     timeout: 3600
-  with_items: "{{ ec2.instances }}"
-  when: ec2.instances is defined
+  loop: "{{ ec2.instances |flatten(levels=1) }}"
 
 - name: Wait for connection to come up
-  wait_for: 
-    host: "{{ item.public_ip_address }}" 
-    port: "{{ wait_for_port }}" 
+  when: ec2.tagged_instances is defined
+  ansible.builtin.wait_for:
+    host: "{{ item.public_ip_address }}"
+    port: "{{ wait_for_port }}"
     state: started
     timeout: 3600
-  with_items: "{{ ec2.tagged_instances }}"
-  when: ec2.tagged_instances is defined
+  loop: "{{ ec2.tagged_instances |flatten(levels=1) }}"
 
 - name: Setting stats for future tasks
   ansible.builtin.set_stats:

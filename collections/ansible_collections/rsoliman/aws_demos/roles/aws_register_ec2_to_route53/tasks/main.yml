@@ -15,4 +15,3 @@
   ansible.builtin.debug:
     msg: "DNS: {{ ec2_name_tag|lower }}-{{ item.0 }}.{{ dns_zone }}         IP_ADDRESS: {{ item.1.public_ip }}"
   with_indexed_items: "{{ ec2.instances }}"
-

@@ -2,4 +2,4 @@
 - name: Provision EC2
   hosts: all
   roles:
-  - rsoliman.aws_demos.aws_provision_ec2
+    - rsoliman.aws_demos.aws_provision_ec2

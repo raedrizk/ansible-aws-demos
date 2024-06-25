@@ -26,7 +26,6 @@
   until: create_subnet is not failed
   retries: 15
 
-
 - name: Create First Additional ENI for the EC2 instance with Infloblox provided IP
   amazon.aws.ec2_eni:
     name: "{{ eni_name }}-1"
@@ -45,5 +44,3 @@
       Provisioner: "{{ provisioner_tag }}"
       Created: "{{ created_tag }}"
   when: instance_id is defined
-
-
