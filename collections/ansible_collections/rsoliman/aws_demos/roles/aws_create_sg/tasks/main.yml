@@ -1,7 +1,8 @@
 ---
 # tasks file for aws_create_sg
 - name: Create Group and enable Ingress 22 for SSH, 3389 for RDP, 5985 and 5986 for WinRM
-  amazon.aws.ec2_group:
+  register: created_sg
+  amazon.aws.ec2_security_group:
     name: "{{ sg_name_tag }}"
     description: "Ansible Managed Security Group: {{ sg_name_tag }} "
     region: "{{ aws_region }}"
@@ -11,39 +12,33 @@
       - proto: tcp
         ports:
           - 22
-        cidr_ip: 0.0.0.0/0
+        cidr_ip: "0.0.0.0/0"
         rule_desc: SSH
       - proto: tcp
         ports:
           - 5985
-        cidr_ip: 0.0.0.0/0
+        cidr_ip: "0.0.0.0/0"
         rule_desc: WinRM_HTTP
       - proto: tcp
         ports:
           - 5986
-        cidr_ip: 0.0.0.0/0
+        cidr_ip: "0.0.0.0/0"
         rule_desc: WinRM_HTTPS
       - proto: tcp
         ports:
           - 3389
-        cidr_ip: 0.0.0.0/0
+        cidr_ip: "0.0.0.0/0"
         rule_desc: RDP
-  register: created_sg
 
 - name: Create Ingress Rules on the SG
-  amazon.aws.ec2_group:
+  when: tcp_ingress_ports is defined
+  amazon.aws.ec2_security_group:
     name: "{{ sg_name_tag }}"
     description: "Ansible Managed Security Group: {{ sg_name_tag }} "
     region: "{{ aws_region }}"
     purge_rules: false
     vpc_id: "{{ stat_created_vpc_id }}"
-    rules:
-      - proto: tcp
-        ports:
-          - "{{ item }}"
-        cidr_ip: 0.0.0.0/0
-  with_items: "{{ tcp_ingress_ports }}"
-  when: tcp_ingress_ports is defined 
+    rules: "{{ tcp_ingress_ports }}"
 
 - name: Setting stats for future tasks
   ansible.builtin.set_stats:

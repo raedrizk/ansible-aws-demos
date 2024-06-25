@@ -13,4 +13,3 @@ tcp_ingress_ports:
   - 443
   - 80
   - 8080
-  

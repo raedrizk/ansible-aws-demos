@@ -3,4 +3,4 @@
   hosts: all
   gather_facts: false
   roles:
-  - rsoliman.aws_demos.aws_create_ami
+    - rsoliman.aws_demos.aws_create_ami

@@ -4,26 +4,24 @@
     region: "{{ aws_region }}"
     filters:
       instance-state-name: running
-      "tag:Name": "{{ ec2_name_tag }}"
-      "tag:Provisioner": "{{ provisioner_tag }}"
+      tag:Name: "{{ ec2_name_tag }}"
+      tag:Provisioner: "{{ provisioner_tag }}"
   register: ec2
 
 - name: Terminate Existing EC2 Instances if found
   amazon.aws.ec2_instance:
-    instance_ids: "{{ item.instance_id }}"
+    instance_ids: "{{ ec2.instances }}"
     state: absent
     region: "{{ aws_region }}"
-    wait: yes
-  with_items: "{{ ec2.instances }}"
-
+    wait: true
 
 - name: Delete Security Group for {{ ec2_name_tag }} WebServers
-  amazon.aws.ec2_group:
+  ignore_errors: true
+  register: delete_sg
+  amazon.aws.ec2_security_group:
     name: "{{ sg_name_tag }}"
     region: "{{ aws_region }}"
     state: absent
-  ignore_errors: yes
-  register: delete_sg
 
 - name: Fail if unable to delete the SG for any other reason than the Dependancy violation
   ansible.builtin.fail:

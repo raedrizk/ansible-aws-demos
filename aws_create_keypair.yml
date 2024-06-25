@@ -2,4 +2,4 @@
 - name: create keypair
   hosts: all
   roles:
-  - rsoliman.aws_demos.aws_create_keypair
+    - rsoliman.aws_demos.aws_create_keypair
