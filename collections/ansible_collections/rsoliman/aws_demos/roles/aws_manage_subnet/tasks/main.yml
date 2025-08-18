@@ -1,0 +1,28 @@
+---
+# tasks file for aws_create_subnet
+- name: Create subnet with name tag {{ aws_manage_subnet_subnet_name_tag }}
+  amazon.aws.ec2_vpc_subnet:
+    region: "{{ aws_manage_subnet_aws_region }}"
+    az: "{{ aws_manage_subnet_subnet_az }}"
+    vpc_id: "{{ aws_manage_subnet_vpc_id if (aws_manage_subnet_vpc_id is defined and aws_manage_subnet_vpc_id != '') else stat_created_vpc_id }}"
+    cidr: "{{ aws_manage_subnet_cidr_block }}"
+    map_public: true
+    wait_timeout: 600
+    resource_tags:
+      Name: "{{ aws_manage_subnet_subnet_name_tag }}"
+      Provisioner: "{{ aws_manage_subnet_provisioner_tag }}"
+      Created: "{{ aws_manage_subnet_created_tag }}"
+  register: manage_subnet
+  until: manage_subnet is not failed
+  retries: 15
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_subnet_id: "{{ manage_subnet.subnet.id | default('') }}"
+  when: manage_subnet.subnet.id is defined
+
+- name: Setting facts for future tasks
+  ansible.builtin.set_fact:
+    stat_created_subnet_id: "{{ manage_subnet.subnet.id | default('') }}"
+  when: manage_subnet.subnet.id is defined

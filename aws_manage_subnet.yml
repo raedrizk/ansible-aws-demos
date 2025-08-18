@@ -1,0 +1,5 @@
+---
+- name: Manage Subnet
+  hosts: all
+  roles:
+    - rsoliman.aws_demos.aws_manage_subnet
