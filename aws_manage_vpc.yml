@@ -2,4 +2,4 @@
 - name: Manage VPC
   hosts: all
   roles:
-  - rsoliman.aws_demos.aws_manage_vpc
+    - rsoliman.aws_demos.aws_manage_vpc
