@@ -19,9 +19,9 @@
     purge_rules: false
     vpc_id: "{{ aws_manage_sg_vpc_id if aws_manage_sg_vpc_id is defined else stat_created_vpc_id }}"
     rules:
-      - proto: "{{ itemp.protocol }}"
+      - proto: "{{ item.protocol }}"
         ports:
-          - "{{ itemp.port }}"
+          - "{{ item.port }}"
         cidr_ip: "{{ item.cidr }}"
         rule_desc: "{{ item.desc }}"
   with_items: "{{ aws_manage_sg_tcp_ingress_ports }}"
@@ -36,9 +36,9 @@
     purge_rules: false
     vpc_id: "{{ aws_manage_sg_vpc_id if aws_manage_sg_vpc_id is defined else stat_created_vpc_id }}"
     rules:
-      - proto: "{{ itemp.protocol }}"
+      - proto: "{{ item.protocol }}"
         ports:
-          - "{{ itemp.port }}"
+          - "{{ item.port }}"
         cidr_ip: "{{ item.cidr }}"
         rule_desc: "{{ item.desc }}"
   with_items: "{{ aws_manage_sg_tcp_custom_ingress_port }}"
