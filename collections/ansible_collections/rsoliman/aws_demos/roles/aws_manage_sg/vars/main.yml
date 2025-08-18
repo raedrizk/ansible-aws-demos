@@ -1,0 +1,41 @@
+---
+# vars file for aws_manage_sg
+aws_manage_sg_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+aws_manage_sg_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+aws_manage_sg_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+# SG variables
+aws_manage_sg_sg_name_tag: "{{ sg_name_tag_choice | default('Ansible_created_SG') }}"
+aws_manage_sg_sg_state: "{{ sg_state_choice | default('present') }}"
+aws_manage_sg_tcp_ingress_ports:
+  - desc: SSH
+    port: 22
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: WinRM_HTTP
+    port: 5985
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: WinRM_HTTPS
+    port: 5986
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: RDP
+    port: 3389
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: HTTP
+    port: 80
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: HTTPS
+    port: 443
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: HTTP ALT
+    port: 8080
+    protocol: tcp
+    cidr: 0.0.0.0/0
+  - desc: HTTPS ALT
+    port: 8443
+    protocol: tcp
+    cidr: 0.0.0.0/0

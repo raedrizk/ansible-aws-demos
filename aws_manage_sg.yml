@@ -1,0 +1,5 @@
+---
+- name: Manage Security Group
+  hosts: all
+  roles:
+  - rsoliman.aws_demos.aws_manage_sg

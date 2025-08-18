@@ -1,5 +1,0 @@
----
-- name: create Security Group
-  hosts: all
-  roles:
-  - rsoliman.aws_demos.aws_create_sg
