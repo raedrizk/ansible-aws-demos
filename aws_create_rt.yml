@@ -1,5 +1,0 @@
----
-- name: create Routing Table
-  hosts: all
-  roles:
-  - rsoliman.aws_demos.aws_create_routing_table

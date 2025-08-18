@@ -1,0 +1,20 @@
+---
+# tasks file for aws_manage_rt
+- name: Manage Routing table
+  amazon.aws.ec2_vpc_route_table:
+    region: "{{ aws_manage_rt_aws_region }}"
+    state: "{{ aws_manage_rt_rt_state }}"
+    vpc_id: "{{ aws_manage_rt_vpc_id if (aws_manage_rt_vpc_id is defined and aws_manage_rt_vpc_id != '') else stat_created_vpc_id }}"
+    subnets:
+      - "{{ aws_manage_rt_subnet_id if (aws_manage_rt_subnet_id is defined and aws_manage_rt_subnet_id != '') else stat_created_subnet_id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ aws_manage_rt_gateway_id if (aws_manage_rt_gateway_id is defined and aws_manage_rt_gateway_id != '') else stat_created_igw_id }}"
+    tags:
+      Name: "{{ aws_manage_rt_rt_name_tag }}"
+      Provisioner: "{{ aws_manage_rt_provisioner_tag }}"
+      Created: "{{ aws_manage_rt_created_tag }}"
+  register: manage_routetable
+  until: manage_routetable is not failed
+  retries: 5
+  delay: 5

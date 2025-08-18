@@ -1,0 +1,5 @@
+---
+- name: Manage Routing Table
+  hosts: all
+  roles:
+    - rsoliman.aws_demos.aws_manage_rt
