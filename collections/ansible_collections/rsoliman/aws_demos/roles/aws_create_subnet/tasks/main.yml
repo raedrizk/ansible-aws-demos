@@ -1,6 +1,6 @@
 ---
 # tasks file for aws_create_subnet
-- name: Create subnet {{ subnet_name_tag }} for {{ stat_created_vpc_id }} vpc
+- name: Create subnet for VPC {{ stat_created_vpc_id }} with name tag {{ subnet_name_tag }}
   amazon.aws.ec2_vpc_subnet:
     region: "{{ aws_region }}"
     az: "{{ subnet_az }}"

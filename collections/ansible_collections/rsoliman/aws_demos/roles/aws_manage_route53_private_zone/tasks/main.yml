@@ -1,0 +1,22 @@
+---
+- name: Manege a private zone
+  amazon.aws.route53_zone:
+    zone: "{{ private_zone_name }}"
+    state: "{{ private_zone_state }}"
+    vpc_id: "{{ stat_created_vpc_id }}"
+    vpc_region: "{{ aws_region }}"
+    tags:
+      Provisioner: "{{ provisioner_tag }}"
+      Created: "{{ created_tag }}"
+  register: private_zone
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_zone_id: "{{ private_zone['zone_id'] | default('') }}"
+  when: private_zone['zone_id'] is defined
+
+- name: Setting facts for future tasks
+  ansible.builtin.set_fact:
+    fact_created_zone_id: "{{ private_zone['zone_id'] | default('') }}"
+  when: private_zone['zone_id'] is defined

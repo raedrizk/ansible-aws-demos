@@ -1,0 +1,7 @@
+---
+# vars file for aws_create_route53_private_zone
+aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+private_zone_name: "{{ private_zone_name_choice | default('foxhound.unit') }}"
+private_zone_state: "{{ private_zone_state_choice | default('present') }}"
+provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"

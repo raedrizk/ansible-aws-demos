@@ -1,8 +1,8 @@
 ---
 # tasks file for aws_create_vpc
-- name: Create AWS VPC {{ vpc_name_tag }}-vpc
+- name: Create AWS VPC {{ vpc_name_tag }}
   amazon.aws.ec2_vpc_net:
-    name: "{{ vpc_name_tag }}-vpc"
+    name: "{{ vpc_name_tag }}"
     cidr_block:
       - "{{ cidr_block }}"
     region: "{{ aws_region }}"
