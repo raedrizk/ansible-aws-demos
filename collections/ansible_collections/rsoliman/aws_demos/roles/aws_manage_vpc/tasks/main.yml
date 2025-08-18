@@ -1,0 +1,27 @@
+---
+# tasks file for aws_manage_vpc
+- name: Manage AWS VPC {{ aws_manage_vpc_vpc_name_tag }}
+  amazon.aws.ec2_vpc_net:
+    name: "{{ aws_manage_vpc_vpc_name_tag }}"
+    state: "{{ aws_manage_vpc_vpc_state }}"
+    cidr_block:
+      - "{{ aws_manage_vpc_cidr_block }}"
+    region: "{{ aws_manage_vpc_aws_region }}"
+    tags:
+      Name: "{{ aws_manage_vpc_vpc_name_tag }}"
+      Provisioner: "{{ aws_manage_vpc_provisioner_tag }}"
+      Created: "{{ aws_managee_vpc_created_tag }}"
+  register: manage_vpc
+  until: manage_vpc is not failed
+  retries: 5
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_vpc_id: "{{ manage_vpc.vpc.id | default('') }}"
+  when: manage_vpc.vpc.id is defined
+
+- name: Setting Facts for future tasks
+  ansible.builtin.set_fact:
+    stat_created_vpc_id: "{{ manage_vpc.vpc.id | default('') }}"
+  when: manage_vpc.vpc.id is defined

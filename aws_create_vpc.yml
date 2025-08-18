@@ -1,5 +1,0 @@
----
-- name: create VPC
-  hosts: all
-  roles:
-  - rsoliman.aws_demos.aws_create_vpc

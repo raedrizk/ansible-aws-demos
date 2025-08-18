@@ -1,0 +1,9 @@
+---
+# vars file for aws_create_vpc
+aws_manage_vpc_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+aws_manage_vpc_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+aws_manage_vpc_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+# vpc Variables
+aws_manage_vpc_vpc_name_tag: "{{ vpc_name_tag_choice | default('Ansible_Created_VPC') }}"
+aws_manage_vpc_vpc_state: "{{ vpc_state_choice | default('present') }}"
+aws_manage_vpc_cidr_block: "{{ cidr_block_choice | default('172.17.0.0/16') }}"
