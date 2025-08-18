@@ -24,8 +24,8 @@
           - "{{ itemp.port }}"
         cidr_ip: "{{ item.cidr }}"
         rule_desc: "{{ item.desc }}"
-  with_items: "{{ tcp_ingress_ports }}"
-  when: tcp_ingress_ports is defined and aws_manage_sg_sg_state | bool
+  with_items: "{{ aws_manage_sg_tcp_ingress_ports }}"
+  when: aws_manage_sg_tcp_ingress_ports is defined and aws_manage_sg_sg_state | bool
 
 - name: Manage Custom Ingress Rules on the SG
   amazon.aws.ec2_security_group:
