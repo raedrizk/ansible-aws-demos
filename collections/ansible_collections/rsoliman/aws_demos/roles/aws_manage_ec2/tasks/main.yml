@@ -10,7 +10,7 @@
           instance-state-name: running
           "tag:Name": "{{ aws_manage_ec2_ec2_name_tag }}"
           "tag:Provisioner": "{{ aws_manage_ec2_provisioner_tag }}"
-      register: eixting_ec2
+      register: existing_ec2
 
     - name: Terminate Existing EC2 Instances if found
       amazon.aws.ec2_instance:
