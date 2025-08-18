@@ -5,6 +5,6 @@ aws_manage_subnet_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible
 aws_manage_subnet_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
 # subnet Variables
 aws_manage_subnet_subnet_name_tag: "{{ subnet_name_tag_choice | default('Ansible_created_Subnet') }}"
-aws_manage_subnet_subnet_state: "{{ subnet_state_choice | default('present') }}"
+aws_manage_subnet_subnet_state: "{{ state_choice | default('present') }}"
 aws_manage_subnet_subnet_az: "{{ aws_region_choice }}{{ subnet_az_choice | default('a') }}"
 aws_manage_subnet_cidr_block: "{{ subnet_cidr_block_choice | default('172.17.2.0/24') }}"
