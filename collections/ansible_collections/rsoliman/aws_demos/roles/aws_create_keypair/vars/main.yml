@@ -1,7 +1,0 @@
----
-# vars file for aws_create_keypair
-aws_region: "{{ aws_region_choice | default('us-east-1') }}"
-
-#KeyPair Variables
-keypair_name: "{{ keypair_name_choice | default('Ansible_Created_Keypair') }}"
-keypair_material: "{{ keypair_material_choice | default('') }}"

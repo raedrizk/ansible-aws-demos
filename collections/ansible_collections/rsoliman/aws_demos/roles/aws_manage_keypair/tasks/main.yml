@@ -1,0 +1,20 @@
+---
+# tasks file for aws_manage_keypair
+- name: Manage EC2 SSH key pair
+  amazon.aws.ec2_key:
+    name: "{{ aws_manage_keypair_keypair_name }}"
+    state: "{{ aws_manage_keypair_keypair_state }}"
+    region: "{{ aws_manage_keypair_aws_region }}"
+    key_material: "{{ aws_manage_keypair_keypair_material }}"
+  register: managed_key
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_keypair_name: "{{ managed_key.key.name | default('') }}"
+  when: managed_key.key.name is defined
+
+- name: Setting facts for future tasks
+  ansible.builtin.set_fact:
+    stat_created_keypair_name: "{{ managed_key.key.name | default('') }}"
+  when: managed_key.key.name is defined

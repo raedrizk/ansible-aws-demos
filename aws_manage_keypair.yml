@@ -1,0 +1,5 @@
+---
+- name: Manage keypair
+  hosts: all
+  roles:
+    - rsoliman.aws_demos.aws_manage_keypair

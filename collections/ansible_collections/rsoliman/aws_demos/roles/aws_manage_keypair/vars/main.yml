@@ -1,0 +1,7 @@
+---
+# vars file for aws_manage_keypair
+aws_manage_keypair_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+# KeyPair Variables
+aws_manage_keypair_keypair_name: "{{ keypair_name_choice | default('Ansible_Created_Keypair') }}"
+aws_manage_keypair_keypair_state: "{{ state_choice | default('present') }}"
+aws_manage_keypair_keypair_material: "{{ keypair_material_choice | default('') }}"
