@@ -10,7 +10,7 @@
     vpc_id: "{{ stat_created_vpc_id }}"
   register: managed_sg
 
-- name: Manage Ingress Rules on the SG
+- name: Manage Standard Ingress Rules on the SG
   amazon.aws.ec2_security_group:
     name: "{{ sg_name_tag }}"
     state: "{{ aws_manage_sg_sg_state }}"
@@ -26,6 +26,24 @@
         rule_desc: "{{ item.desc }}"
   with_items: "{{ tcp_ingress_ports }}"
   when: tcp_ingress_ports is defined and aws_manage_sg_sg_state | bool
+
+- name: Manage Custom Ingress Rules on the SG
+  amazon.aws.ec2_security_group:
+    name: "{{ sg_name_tag }}"
+    state: "{{ aws_manage_sg_sg_state }}"
+    description: "Ansible Managed Security Group: {{ sg_name_tag }} "
+    region: "{{ aws_region }}"
+    purge_rules: false
+    vpc_id: "{{ stat_created_vpc_id }}"
+    rules:
+      - proto: "{{ itemp.protocol }}"
+        ports:
+          - "{{ itemp.port }}"
+        cidr_ip: "{{ item.cidr }}"
+        rule_desc: "{{ item.desc }}"
+  with_items: "{{ aws_manage_sg_tcp_custom_ingress_port }}"
+  when: aws_manage_sg_tcp_custom_ingress_port is defined and aws_manage_sg_sg_state | bool
+
 
 - name: Setting stats for future tasks
   ansible.builtin.set_stats:
