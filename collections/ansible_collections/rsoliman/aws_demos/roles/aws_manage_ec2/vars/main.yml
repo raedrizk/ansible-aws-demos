@@ -31,10 +31,10 @@ aws_manage_ec2_ec2_instance_count: "{{ ec2_instance_count_choice | default(1) }}
 aws_manage_ec2_ec2_instance_os: "{{ ec2_instance_os_choice | default('RHEL9') }}"
 aws_manage_ec2_ec2_ami_id: "{{ aws_manage_ec2_ami_ids[aws_manage_ec2_aws_region][aws_manage_ec2_ec2_instance_os] }}"
 aws_manage_ec2_ec2_volume_size: "{{ ec2_volume_size_choice | default(50) }}"
-aws_manage_ec2_wait_for_port: "{{ 5986 when 'WIN' in ec2_instance_os else 22 }}"
-aws_manage_ec2_ec2_userdata_template_file_name: "{{ 'userdata_Windows.txt.j2' when 'WIN' in ec2_instance_os else 'serdata_Linux.txt.j2' }}"
+aws_manage_ec2_wait_for_port: "{{ 5986 if ('WIN' in ec2_instance_os) else 22 }}"
+aws_manage_ec2_ec2_userdata_template_file_name: "{{ 'userdata_Windows.txt.j2' if ('WIN' in ec2_instance_os) else 'userdata_Linux.txt.j2' }}"
 
 # Values usually set by previous playbooks or tasks
-aws_manage_ec2_ec2_keypair_name: "{{ stat_created_keypair_name | default('Ansible_Created_Keypair') }}"
-aws_manage_ec2_ec2_subnet_id: "{{ stat_created_subnet_id | default('') }}"
-aws_manage_ec2_ec2_security_group: "{{ stat_created_sg_id | default('') }}"
+aws_manage_ec2_ec2_keypair_name: "{{ ec2_keypair_name if (ec2_keypair_name is defined and ec2_keypair_name != '') else stat_created_keypair_name }}"
+aws_manage_ec2_ec2_subnet_id: "{{ ec2_subnet_id if (ec2_subnet_id is defined and ec2_subnet_id != '') else stat_created_subnet_id }}"
+aws_manage_ec2_ec2_security_group: "{{ ec2_security_group if (ec2_security_group is defined and ec2_security_group != '') else stat_created_sg_id }}"
