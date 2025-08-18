@@ -1,0 +1,5 @@
+---
+- name: Manage IGW
+  hosts: all
+  roles:
+  - rsoliman.aws_demos.aws_manage_internet_gateway
