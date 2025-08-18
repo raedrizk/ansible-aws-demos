@@ -41,7 +41,7 @@ aws_manage_sg_tcp_ingress_ports:
     cidr: 0.0.0.0/0
 
 aws_manage_sg_tcp_custom_ingress_port:
-  - desc: "{{ tcp_custom_ingress_port_choice_desc | default(omit) }}"
-    port: "{{ tcp_custom_ingress_port_choice_port | default(omit) }}"
-    protocol: "{{ tcp_custom_ingress_port_choice_protocol | default(omit) }}"
-    cidr: "{{ tcp_custom_ingress_port_choice_cidr | default(omit) }}"
+  - desc: "{{ tcp_custom_ingress_port_choice_desc }}"
+    port: "{{ tcp_custom_ingress_port_choice_port }}"
+    protocol: "{{ tcp_custom_ingress_port_choice_protocol }}"
+    cidr: "{{ tcp_custom_ingress_port_choice_cidr }}"

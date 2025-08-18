@@ -42,7 +42,7 @@
         cidr_ip: "{{ item.cidr }}"
         rule_desc: "{{ item.desc }}"
   with_items: "{{ aws_manage_sg_tcp_custom_ingress_port }}"
-  when: aws_manage_sg_tcp_custom_ingress_port is defined and aws_manage_sg_sg_state == 'present'
+  when: aws_manage_sg_tcp_custom_ingress_port is defined and aws_manage_sg_tcp_custom_ingress_port != '' and aws_manage_sg_sg_state == 'present'
 
 
 - name: Setting stats for future tasks
