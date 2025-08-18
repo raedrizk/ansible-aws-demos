@@ -1,5 +1,5 @@
 ---
-- name: print info
+- name: Print info
   ansible.builtin.debug:
     var: ec2.instances
 

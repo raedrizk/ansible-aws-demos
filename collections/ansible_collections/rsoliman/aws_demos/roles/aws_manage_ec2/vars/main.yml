@@ -1,0 +1,40 @@
+---
+# AMI Lookup Aug 2025
+aws_manage_ec2_ami_ids:
+  us-east-1:
+    RHEL8: 'ami-051641646cbcf6081' # RHEL8
+    RHEL9: 'ami-0d85f16af633ab171' # RHEL9
+    WIN2019: 'ami-0623bc4c9a53fe562' # WIN2019
+  us-east-2:
+    RHEL8: 'ami-0542222043eb8dd9d' # RHEL8
+    RHEL9: 'ami-0c2cce1ca6b943930' # RHEL9
+    WIN2019: 'ami-0731f5a16a56b7cfe' # WIN2019
+  us-west-1:
+    RHEL8: 'ami-0e724066d928f486f' # RHEL8
+    RHEL9: 'ami-02b014d5a99c5e5e4' # RHEL9
+    WIN2019: 'ami-0a28e22717e99af98' # WIN2019
+  us-west-2:
+    RHEL8: 'ami-05ca47ff5443973e9' # RHEL8
+    RHEL9: 'ami-00d29e73763974233' # RHEL9
+    WIN2019: 'ami-09652b0630ca9d8d0' # WIN2019
+
+# vars file for aws-create-ec2
+aws_manage_ec2_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+aws_manage_ec2_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+aws_manage_ec2_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+
+# Instance variables
+aws_manage_ec2_ec2_name_tag: "{{ ec2_name_tag_choice | default('Ansible_Created_EC2') }}"
+aws_manage_ec2_ec2_instance_type: "{{ ec2_instance_type_choice | default('t2.micro') }}"
+aws_manage_ec2_ec2_instance_state: "{{ ec2_instance_state_choice | default('running') }}"
+aws_manage_ec2_ec2_instance_count: "{{ ec2_instance_count_choice | default(1) }}"
+aws_manage_ec2_ec2_instance_os: "{{ ec2_instance_os_choice | default('RHEL9') }}"
+aws_manage_ec2_ec2_ami_id: "{{ aws_manage_ec2_ami_ids[aws_manage_ec2_aws_region][aws_manage_ec2_ec2_instance_os] }}"
+aws_manage_ec2_ec2_volume_size: "{{ ec2_volume_size_choice | default(50) }}"
+aws_manage_ec2_wait_for_port: "{{ 5986 when 'WIN' in ec2_instance_os else 22 }}"
+aws_manage_ec2_ec2_userdata_template_file_name: "{{ 'userdata_Windows.txt.j2' when 'WIN' in ec2_instance_os else 'serdata_Linux.txt.j2' }}"
+
+# Values usually set by previous playbooks or tasks
+aws_manage_ec2_ec2_keypair_name: "{{ stat_created_keypair_name | default('Ansible_Created_Keypair') }}"
+aws_manage_ec2_ec2_subnet_id: "{{ stat_created_subnet_id | default('') }}"
+aws_manage_ec2_ec2_security_group: "{{ stat_created_sg_id | default('') }}"
