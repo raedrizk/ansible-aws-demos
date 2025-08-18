@@ -1,0 +1,6 @@
+---
+- name: Manage EC2
+  hosts: all
+  roles:
+    - rsoliman.aws_demos.aws_manage_ec2
+
