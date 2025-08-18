@@ -1,0 +1,7 @@
+---
+# vars file for aws_manage_internet_gateway
+aws_manage_internet_gateway_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
+aws_manage_internet_gateway_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
+aws_manage_internet_gateway_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
+# IGW  Variables
+aws_manage_internet_gateway_igw_name_tag: "{{ internet_gateway_name_tag_choice | default('Ansible_created_IGW') }}"

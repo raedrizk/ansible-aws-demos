@@ -1,0 +1,24 @@
+---
+# tasks file for aws_manage_internet_gateway
+- name: Manage internet gateway
+  amazon.aws.ec2_vpc_igw:
+    region: "{{ aws_manage_internet_gateway_aws_region }}"
+    vpc_id: "{{ aws_manage_sg_vpc_id if (aws_manage_sg_vpc_id is defined and aws_manage_sg_vpc_id != '') else stat_created_vpc_id }}"
+    tags:
+      Name: "{{ aws_manage_internet_gateway_igw_name_tag }}"
+      Provisioner: "{{ aws_manage_internet_gateway_provisioner_tag }}"
+      Created: "{{ aws_manage_internet_gateway_created_tag }}"
+  register: manage_igw
+  until: manage_igw is not failed
+  retries: 15
+
+- name: Setting stats for future tasks
+  ansible.builtin.set_stats:
+    data:
+      stat_created_igw_id: "{{ manage_igw.gateway_id | default('') }}"
+  when: manage_igw.gateway_id is defined
+
+- name: Setting facts for future tasks
+  ansible.builtin.set_fact:
+    stat_created_igw_id: "{{ manage_igw.gateway_id | default('') }}"
+  when: manage_igw.gateway_id is defined
