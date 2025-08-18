@@ -2,7 +2,8 @@
 # tasks file for aws_manage_internet_gateway
 - name: Manage internet gateway
   amazon.aws.ec2_vpc_igw:
-    region: "{{ aws_manage_internet_gateway_aws_region }}"
+    region: "{{ aws_manage_internet_gaeway_aws_region }}"
+    state: "{{ aws_manage_internet_gateway_igw_state }}"
     vpc_id: "{{ aws_manage_sg_vpc_id if (aws_manage_sg_vpc_id is defined and aws_manage_sg_vpc_id != '') else stat_created_vpc_id }}"
     tags:
       Name: "{{ aws_manage_internet_gateway_igw_name_tag }}"
