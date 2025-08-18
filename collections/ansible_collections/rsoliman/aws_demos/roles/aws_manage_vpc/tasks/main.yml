@@ -10,7 +10,7 @@
     tags:
       Name: "{{ aws_manage_vpc_vpc_name_tag }}"
       Provisioner: "{{ aws_manage_vpc_provisioner_tag }}"
-      Created: "{{ aws_managee_vpc_created_tag }}"
+      Created: "{{ aws_manage_vpc_created_tag }}"
   register: manage_vpc
   until: manage_vpc is not failed
   retries: 5
