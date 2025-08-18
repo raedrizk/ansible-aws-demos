@@ -25,7 +25,7 @@
         cidr_ip: "{{ item.cidr }}"
         rule_desc: "{{ item.desc }}"
   with_items: "{{ aws_manage_sg_tcp_ingress_ports }}"
-  when: aws_manage_sg_tcp_ingress_ports is defined and aws_manage_sg_sg_state | bool
+  when: aws_manage_sg_tcp_ingress_ports is defined and aws_manage_sg_sg_state == 'present'
 
 - name: Manage Custom Ingress Rules on the SG
   amazon.aws.ec2_security_group:
@@ -42,7 +42,7 @@
         cidr_ip: "{{ item.cidr }}"
         rule_desc: "{{ item.desc }}"
   with_items: "{{ aws_manage_sg_tcp_custom_ingress_port }}"
-  when: aws_manage_sg_tcp_custom_ingress_port is defined and aws_manage_sg_sg_state | bool
+  when: aws_manage_sg_tcp_custom_ingress_port is defined and aws_manage_sg_sg_state == 'present'
 
 
 - name: Setting stats for future tasks
