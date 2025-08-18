@@ -31,8 +31,8 @@ aws_manage_ec2_ec2_instance_count: "{{ ec2_instance_count_choice | default(1) }}
 aws_manage_ec2_ec2_instance_os: "{{ ec2_instance_os_choice | default('RHEL9') }}"
 aws_manage_ec2_ec2_ami_id: "{{ aws_manage_ec2_ami_ids[aws_manage_ec2_aws_region][aws_manage_ec2_ec2_instance_os] }}"
 aws_manage_ec2_ec2_volume_size: "{{ ec2_volume_size_choice | default(50) }}"
-aws_manage_ec2_wait_for_port: "{{ 5986 if ('WIN' in ec2_instance_os) else 22 }}"
-aws_manage_ec2_ec2_userdata_template_file_name: "{{ 'userdata_Windows.txt.j2' if ('WIN' in ec2_instance_os) else 'userdata_Linux.txt.j2' }}"
+aws_manage_ec2_wait_for_port: "{{ 5986 if ('WIN' in aws_manage_ec2_ec2_instance_os) else 22 }}"
+aws_manage_ec2_ec2_userdata_template_file_name: "{{ 'userdata_Windows.txt.j2' if ('WIN' in aws_manage_ec2_ec2_instance_os) else 'userdata_Linux.txt.j2' }}"
 
 # Values usually set by previous playbooks or tasks
 aws_manage_ec2_ec2_keypair_name: "{{ ec2_keypair_name if (ec2_keypair_name is defined and ec2_keypair_name != '') else stat_created_keypair_name }}"
