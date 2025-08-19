@@ -4,5 +4,5 @@ aws_manage_rt_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
 aws_manage_rt_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
 aws_manage_rt_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
 # routing table Variables
-aws_manage_rt_rt_name_tag: "{{ rt_name_tag_choice | default('Ansible_created_RT') }}"
+aws_manage_rt_rt_name_tag: "{{ name_tag_choice | default('Ansible_created_RT') }}"
 aws_manage_rt_rt_state: "{{ state_choice | default('present') }}"

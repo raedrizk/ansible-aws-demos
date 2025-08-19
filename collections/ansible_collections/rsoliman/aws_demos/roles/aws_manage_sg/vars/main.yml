@@ -4,7 +4,7 @@ aws_manage_sg_aws_region: "{{ aws_region_choice | default('us-east-1') }}"
 aws_manage_sg_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') }}"
 aws_manage_sg_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
 # SG variables
-aws_manage_sg_sg_name_tag: "{{ sg_name_tag_choice | default('Ansible_created_SG') }}"
+aws_manage_sg_sg_name_tag: "{{ name_tag_choice | default('Ansible_created_SG') }}"
 aws_manage_sg_sg_state: "{{ state_choice | default('present') }}"
 aws_manage_sg_tcp_ingress_ports:
   - desc: SSH

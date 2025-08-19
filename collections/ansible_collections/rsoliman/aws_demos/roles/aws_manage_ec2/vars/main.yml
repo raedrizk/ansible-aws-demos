@@ -24,7 +24,7 @@ aws_manage_ec2_provisioner_tag: "{{ provisioner_tag_choice | default('Ansible') 
 aws_manage_ec2_created_tag: "{{ created_tag_choice | default(ansible_date_time.date) }}"
 
 # Instance variables
-aws_manage_ec2_ec2_name_tag: "{{ ec2_name_tag_choice | default('Ansible_Created_EC2') }}"
+aws_manage_ec2_ec2_name_tag: "{{ name_tag_choice | default('Ansible_Created_EC2') }}"
 aws_manage_ec2_ec2_instance_type: "{{ ec2_instance_type_choice | default('t2.micro') }}"
 aws_manage_ec2_ec2_instance_state: "{{ ec2_instance_state_choice | default('running') }}"
 aws_manage_ec2_ec2_instance_count: "{{ ec2_instance_count_choice | default(1) }}"

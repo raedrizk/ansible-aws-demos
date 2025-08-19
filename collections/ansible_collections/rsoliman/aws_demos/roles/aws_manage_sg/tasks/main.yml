@@ -31,7 +31,7 @@
   amazon.aws.ec2_security_group:
     name: "{{ aws_manage_sg_sg_name_tag }}"
     state: "{{ aws_manage_sg_sg_state }}"
-    description: "Ansible Managed Security Group: {{ aws_manage_sg_sg_name_tag }} "
+    description: "Ansible Managed Security Group for resources tagged as {{ aws_manage_sg_sg_name_tag }} "
     region: "{{ aws_manage_sg_aws_region }}"
     purge_rules: false
     vpc_id: "{{ aws_manage_sg_vpc_id if (aws_manage_sg_vpc_id is defined and aws_manage_sg_vpc_id != '') else stat_created_vpc_id }}"
