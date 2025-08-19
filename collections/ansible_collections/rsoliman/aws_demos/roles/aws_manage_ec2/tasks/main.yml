@@ -53,6 +53,7 @@
     #   tag:Provisioner: "{{ provisioner_tag }}"
     #   tag:Created: "{{ created_tag }}"
     wait: true
+  when: aws_manage_ec2_ec2_instance_state is defined and aws_manage_ec2_ec2_instance_state != 'absent'
   register: ec2
 
 - name: Wait for connection to come up
